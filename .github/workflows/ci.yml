@@ -26,7 +26,8 @@ jobs:
 
     - name: Run Automated Unit Tests (PyTest)
       run: |
-        pytest
+        # PYTHONPATH=. explicitly tells Python to include the root folder in its search path
+        PYTHONPATH=. pytest
 
   build-container:
     needs: test-and-verify
