@@ -31,19 +31,12 @@ if st.sidebar.button("Set High-Risk Malicious Anomaly"):
     # Highly skewed values that typically trigger anomaly thresholds
     amount, v4, v11, v12, v14 = 2500.0, 6.5, 5.0, -8.0, -9.5
 
-# Automatically compile the complete payload array (29 values total)
-# We fill the rest of the 24 passive parameters with stable random noise centered near 0
-np.random.seed(42)  # Maintain structural consistency
-base_features = list(np.random.normal(0, 0.2, 24))
+# 1. Generate exactly 14 passive baseline variables (29 total expected - 15 explicit slots)
+np.random.seed(42)  
+base_features = list(np.random.normal(0, 0.2, 14))
 
-# Inject the user's explicit interactive sliders into the proper positional indexing slots
-full_payload_features = [
-    v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, 
-    v11, v12, v13, v14, ...
-]
-# For simplicity, we assign the specific interactive sliders and append the rest
-full_payload_features = [0.0, 0.0, 0.0, v4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, v11, v12, 0.0, v14] + base_features[:14] + [amount]
-
+# 2. Map the array cleanly (14 elements + 14 elements + 1 element = 29 total features)
+full_payload_features = [0.0, 0.0, 0.0, v4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, v11, v12, 0.0, v14] + base_features + [amount]
 # Main Dashboard Interface Layout
 col1, col2 = st.columns([1, 1])
 
