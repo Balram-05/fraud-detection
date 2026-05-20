@@ -1,0 +1,13 @@
+# Ignore the entire data directory contents entirely
+data/*
+!data/.gitkeep
+
+# Ignore local python virtual environments
+.venv/
+__pycache__/
+*.pyc
+
+# Ignore local MLflow and testing tracking history files
+.pytest_cache/
+.mlruns/
+mlruns/
